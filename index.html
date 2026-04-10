@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEMISSÃO · NUEM</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0f0f0f;
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+  .card {
+    background: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    border-radius: 16px;
+    padding: 2rem 1.5rem 1.8rem;
+    max-width: 400px;
+    width: 100%;
+  }
+  .header { text-align: center; margin-bottom: 1.6rem; }
+  .siren { font-size: 36px; display: inline-block; animation: shake 0.4s infinite; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+  .label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #666;
+    text-transform: uppercase;
+    margin: 12px 0 4px;
+  }
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    animation: flicker 2s infinite;
+  }
+  @keyframes flicker { 0%,100%{opacity:1} 45%{opacity:0.8} 50%{opacity:0.5} 55%{opacity:0.9} }
+  .subtitle { font-size: 11px; letter-spacing: 0.12em; color: #777; text-transform: uppercase; margin-top: 4px; }
+
+  .vitimas { display: flex; gap: 8px; margin-bottom: 1.6rem; }
+  .vitima {
+    flex: 1;
+    text-align: center;
+    padding: 12px 6px 10px;
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    background: #111;
+  }
+  .vitima-emoji { font-size: 22px; display: block; margin-bottom: 5px; }
+  .vitima-nome { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #e0e0e0; }
+
+  .countdown { display: flex; gap: 10px; justify-content: center; margin-bottom: 1.6rem; }
+  .digit-box {
+    background: #111;
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    padding: 12px 14px;
+    min-width: 72px;
+    text-align: center;
+  }
+  .digit-val { font-size: 44px; font-weight: 600; color: #f0f0f0; line-height: 1; font-variant-numeric: tabular-nums; }
+  .digit-lbl { font-size: 10px; color: #555; margin-top: 5px; text-transform: uppercase; letter-spacing: 0.12em; }
+  .sep { font-size: 36px; font-weight: 300; color: #444; align-self: center; padding-bottom: 18px; line-height: 1; }
+
+  .info { border-top: 1px solid #2a2a2a; padding-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .info-row { display: flex; justify-content: space-between; font-size: 12px; }
+  .info-key { color: #555; text-transform: uppercase; letter-spacing: 0.08em; }
+  .info-val { color: #aaa; }
+  .info-val.strong { color: #f0f0f0; font-weight: 600; }
+
+  .status {
+    text-align: center;
+    font-size: 13px;
+    color: #777;
+    margin-top: 1.2rem;
+    animation: blink 1s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <span class="siren">🚨</span>
+    <p class="label">Comunicado oficial · NUEM</p>
+    <p class="title">Demissão</p>
+    <p class="subtitle">em massa · 3º andar · hoje</p>
+  </div>
+
+  <div class="vitimas">
+    <div class="vitima"><span class="vitima-emoji" id="e0">😰</span><div class="vitima-nome">Porto</div></div>
+    <div class="vitima"><span class="vitima-emoji" id="e1">😰</span><div class="vitima-nome">Marcelo</div></div>
+    <div class="vitima"><span class="vitima-emoji" id="e2">😰</span><div class="vitima-nome">Mateus</div></div>
+  </div>
+
+  <div class="countdown">
+    <div class="digit-box"><div class="digit-val" id="d-h">--</div><div class="digit-lbl">horas</div></div>
+    <div class="sep">:</div>
+    <div class="digit-box"><div class="digit-val" id="d-m">--</div><div class="digit-lbl">min</div></div>
+    <div class="sep">:</div>
+    <div class="digit-box"><div class="digit-val" id="d-s">--</div><div class="digit-lbl">seg</div></div>
+  </div>
+
+  <div class="info">
+    <div class="info-row"><span class="info-key">Local</span><span class="info-val">Sala de reunião · 3º andar</span></div>
+    <div class="info-row"><span class="info-key">Horário</span><span class="info-val">10 abr 2026 · 14h00</span></div>
+    <div class="info-row"><span class="info-key">Executor</span><span class="info-val strong">👴 Papai Rigoberto</span></div>
+  </div>
+
+  <p class="status" id="status">🍿 Três de uma vez. Histórico.</p>
+</div>
+
+<script>
+const target = new Date();
+target.setHours(14, 0, 0, 0);
+function pad(n){ return String(n).padStart(2,'0'); }
+function tick(){
+  const diff = target - new Date();
+  if(diff <= 0){
+    ['d-h','d-m','d-s'].forEach(id => document.getElementById(id).textContent = '00');
+    document.getElementById('status').textContent = '🔥 É AGORA. Deus tenha piedade.';
+    ['e0','e1','e2'].forEach(id => document.getElementById(id).textContent = '💀');
+    return;
+  }
+  document.getElementById('d-h').textContent = pad(Math.floor(diff/3600000));
+  document.getElementById('d-m').textContent = pad(Math.floor((diff%3600000)/60000));
+  document.getElementById('d-s').textContent = pad(Math.floor((diff%60000)/1000));
+  const s = document.getElementById('status');
+  if(diff < 300000) s.textContent = '😱 MENOS DE 5 MIN. SEM VOLTA.';
+  else if(diff < 3600000) s.textContent = '👀 A hora chegou...';
+}
+tick();
+setInterval(tick, 1000);
+</script>
+</body>
+</html>
