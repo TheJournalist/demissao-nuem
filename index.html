@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -95,9 +96,7 @@
   </div>
 
   <div class="vitimas">
-    <div class="vitima"><span class="vitima-emoji" id="e0">😰</span><div class="vitima-nome">Porto</div></div>
-    <div class="vitima"><span class="vitima-emoji" id="e1">😰</span><div class="vitima-nome">Marcelo</div></div>
-    <div class="vitima"><span class="vitima-emoji" id="e2">😰</span><div class="vitima-nome">Mateus</div></div>
+    <div class="vitima"><span class="vitima-emoji" id="e0">😰</span><div class="vitima-nome">Sensor Labs <s>gays</s> guys</div></div>
   </div>
 
   <div class="countdown">
@@ -110,11 +109,11 @@
 
   <div class="info">
     <div class="info-row"><span class="info-key">Local</span><span class="info-val">Sala de reunião · 3º andar</span></div>
-    <div class="info-row"><span class="info-key">Horário</span><span class="info-val">10 abr 2026 · 14h00</span></div>
+    <div class="info-row"><span class="info-key">Horário</span><span class="info-val">17 abr 2026 · 14h00</span></div>
     <div class="info-row"><span class="info-key">Executor</span><span class="info-val strong">👴 Papai Rigoberto</span></div>
   </div>
 
-  <p class="status" id="status">🍿 Três de uma vez. Histórico.</p>
+  <p class="status" id="status">🍿 Todos de uma vez. Histórico.</p>
 </div>
 
 <script>
@@ -126,7 +125,7 @@ function tick(){
   if(diff <= 0){
     ['d-h','d-m','d-s'].forEach(id => document.getElementById(id).textContent = '00');
     document.getElementById('status').textContent = '🔥 É AGORA. Deus tenha piedade.';
-    ['e0','e1','e2'].forEach(id => document.getElementById(id).textContent = '💀');
+    ['e0'].forEach(id => document.getElementById(id).textContent = '💀');
     return;
   }
   document.getElementById('d-h').textContent = pad(Math.floor(diff/3600000));
